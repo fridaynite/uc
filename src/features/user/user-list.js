@@ -1,21 +1,17 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { User } from './user'
+import { CreateUserModal } from './create-modal'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { List, Grid } from '@material-ui/core'
+import { List, Grid, IconButton } from '@material-ui/core'
+
+import { Add as AddIcon } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 752,
-  },
   demo: {
     backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
   },
 }))
 
@@ -23,22 +19,35 @@ export const UserList = (props) => {
   const classes = useStyles()
   const users = useSelector((state) => state.user.data)
 
+  const [open, setOpen] = useState(false)
+
   return (
-    <Grid item xs={12} md={6}>
-      <div className={classes.demo}>
-        <List>
-          {users.map((user) => (
-            <User
-              key={user.id}
-              id={user.id}
-              name={user.name}
-              email={user.email}
-              sex={user.sex}
-              user={user}
-            />
-          ))}
-        </List>
-      </div>
-    </Grid>
+    <Fragment>
+      <Grid item xs={12} md={6}>
+        <IconButton
+          onClick={() => setOpen(true)}
+          edge="end"
+          aria-label="delete"
+        >
+          <AddIcon />
+        </IconButton>
+        <div className={classes.demo}>
+          <List>
+            {users.map((user) => (
+              <User
+                key={user.id}
+                id={user.id}
+                name={user.name}
+                email={user.email}
+                sex={user.sex}
+                user={user}
+              />
+            ))}
+          </List>
+        </div>
+      </Grid>
+
+      <CreateUserModal open={open} handleClose={() => setOpen(false)} />
+    </Fragment>
   )
 }

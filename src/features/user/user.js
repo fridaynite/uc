@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 
 import { remove } from './slice'
 
+import { EditUserModal } from './edit-modal'
+
 import {
   ListItem,
   ListItemAvatar,
@@ -17,7 +19,6 @@ import {
   Delete as DeleteIcon,
   Edit as EditIcon,
 } from '@material-ui/icons'
-import { EditUserModal } from './edit-modal'
 
 export const User = (props) => {
   const [editing, setEditing] = useState(false)
