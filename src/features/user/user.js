@@ -1,3 +1,7 @@
+import { useDispatch } from 'react-redux'
+
+import { remove } from './slice'
+
 import {
   ListItem,
   ListItemAvatar,
@@ -10,6 +14,12 @@ import {
 import { Folder as FolderIcon, Delete as DeleteIcon } from '@material-ui/icons'
 
 export const User = (props) => {
+  const dispatch = useDispatch()
+
+  const handleDelete = () => {
+    dispatch(remove(props.id))
+  }
+
   return (
     <ListItem>
       <ListItemAvatar>
@@ -19,7 +29,7 @@ export const User = (props) => {
       </ListItemAvatar>
       <ListItemText primary={props.name} secondary={props.email} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
+        <IconButton onClick={handleDelete} edge="end" aria-label="delete">
           <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>

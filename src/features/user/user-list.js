@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { User } from './user'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { List, Grid, Typography } from '@material-ui/core'
+import { List, Grid } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,9 +25,6 @@ export const UserList = (props) => {
 
   return (
     <Grid item xs={12} md={6}>
-      <Typography variant="h6" className={classes.title}>
-        Avatar with text and icon
-      </Typography>
       <div className={classes.demo}>
         <List>
           {users.map((user) => (

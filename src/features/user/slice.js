@@ -27,12 +27,12 @@ export const user = createSlice({
         return user
       })
 
-      state.data.push(data)
+      state.data = data
     },
     remove: (state, action) => {
-      const data = state.filter((user) => user.id !== action.payload.id)
+      const data = state.data.filter((user) => user.id !== action.payload)
 
-      state.data.push(data)
+      state.data = data
     },
   },
 })
