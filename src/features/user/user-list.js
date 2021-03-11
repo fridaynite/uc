@@ -1,13 +1,15 @@
 import React, { Fragment, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { User } from './user'
 import { CreateUserModal } from './create-modal'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { List, Grid, IconButton } from '@material-ui/core'
+import { List, Grid, IconButton, Select, MenuItem } from '@material-ui/core'
 
 import { Add as AddIcon } from '@material-ui/icons'
+
+import { sexFilter } from './slice'
 
 const useStyles = makeStyles((theme) => ({
   demo: {
@@ -17,7 +19,20 @@ const useStyles = makeStyles((theme) => ({
 
 export const UserList = (props) => {
   const classes = useStyles()
-  const users = useSelector((state) => state.user.data)
+  const dispatch = useDispatch()
+
+  const sexFilterData = useSelector((state) => state.user.sexFilter)
+  const users = useSelector((state) => {
+    if (sexFilterData) {
+      return state.user.data.filter((user) => user.sex === sexFilterData)
+    }
+
+    return state.user.data
+  })
+
+  const handleSetFilter = (e) => {
+    dispatch(sexFilter(e.target.value))
+  }
 
   const [open, setOpen] = useState(false)
 
@@ -31,6 +46,16 @@ export const UserList = (props) => {
         >
           <AddIcon />
         </IconButton>
+        <Select
+          labelId="sex"
+          id="sex"
+          value={sexFilterData}
+          onChange={handleSetFilter}
+        >
+          <MenuItem value={''}>Both</MenuItem>
+          <MenuItem value={'male'}>Male</MenuItem>
+          <MenuItem value={'female'}>Female</MenuItem>
+        </Select>
         <div className={classes.demo}>
           <List>
             {users.map((user) => (

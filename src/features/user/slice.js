@@ -11,6 +11,7 @@ export const user = createSlice({
   name: 'user',
   initialState: {
     data: initialData,
+    sexFilter: '',
   },
   reducers: {
     create: (state, action) => {
@@ -32,9 +33,13 @@ export const user = createSlice({
 
       state.data = data
     },
+
+    sexFilter: (state, action) => {
+      state.sexFilter = action.payload
+    },
   },
 })
 
-export const { create, edit, remove } = user.actions
+export const { create, edit, remove, sexFilter } = user.actions
 
 export default user.reducer
