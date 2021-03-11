@@ -1,5 +1,6 @@
 import { useState, Fragment } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { remove } from './slice'
 
@@ -36,7 +37,9 @@ export const User = (props) => {
             <FolderIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={props.name} secondary={props.email} />
+        <Link to={`/user/${props.id}`}>
+          <ListItemText primary={props.name} secondary={props.email} />
+        </Link>
         <ListItemSecondaryAction>
           <IconButton
             onClick={() => setEditing(true)}
