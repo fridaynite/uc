@@ -14,9 +14,7 @@ export const user = createSlice({
   },
   reducers: {
     create: (state, action) => {
-      const data = { ...action.payload, id: Date.now() }
-
-      state.data.push(data)
+      state.data.push(action.payload)
     },
     edit: (state, action) => {
       const data = state.data.map((user) => {

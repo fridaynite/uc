@@ -34,6 +34,7 @@ export const UserList = (props) => {
               name={user.name}
               email={user.email}
               sex={user.sex}
+              user={user}
             />
           ))}
         </List>

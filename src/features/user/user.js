@@ -1,3 +1,4 @@
+import { useState, Fragment } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { remove } from './slice'
@@ -11,9 +12,15 @@ import {
   IconButton,
 } from '@material-ui/core'
 
-import { Folder as FolderIcon, Delete as DeleteIcon } from '@material-ui/icons'
+import {
+  Folder as FolderIcon,
+  Delete as DeleteIcon,
+  Edit as EditIcon,
+} from '@material-ui/icons'
+import { EditUserModal } from './edit-modal'
 
 export const User = (props) => {
+  const [editing, setEditing] = useState(false)
   const dispatch = useDispatch()
 
   const handleDelete = () => {
@@ -21,18 +28,34 @@ export const User = (props) => {
   }
 
   return (
-    <ListItem>
-      <ListItemAvatar>
-        <Avatar>
-          <FolderIcon />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText primary={props.name} secondary={props.email} />
-      <ListItemSecondaryAction>
-        <IconButton onClick={handleDelete} edge="end" aria-label="delete">
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
+    <Fragment>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <FolderIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={props.name} secondary={props.email} />
+        <ListItemSecondaryAction>
+          <IconButton
+            onClick={() => setEditing(true)}
+            edge="end"
+            aria-label="delete"
+          >
+            <EditIcon />
+          </IconButton>
+
+          <IconButton onClick={handleDelete} edge="end" aria-label="delete">
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
+
+      <EditUserModal
+        open={editing}
+        handleClose={() => setEditing(false)}
+        user={props.user}
+      />
+    </Fragment>
   )
 }
