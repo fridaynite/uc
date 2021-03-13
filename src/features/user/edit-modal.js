@@ -36,61 +36,55 @@ export const EditUserModal = ({ open, handleClose, user }) => {
   }
 
   return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Edit user</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To edit user, please enter your email, name and set your sex here.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            error={!email}
-            helperText={!email && 'Set your email'}
-            margin="dense"
-            id="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            margin="dense"
-            error={!name}
-            helperText={!name && 'Set your name'}
-            id="name"
-            label="Name"
-            type="text"
-            fullWidth
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <InputLabel>Sex</InputLabel>
-          <Select
-            labelId="sex"
-            id="sex"
-            fullWidth
-            value={sex}
-            onChange={(e) => setSex(e.target.value)}
-          >
-            <MenuItem value={'male'}>Male</MenuItem>
-            <MenuItem value={'female'}>Female</MenuItem>
-          </Select>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={onSubmit} color="primary">
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog open={open} onClose={handleClose} aria-labelledby="edit-user">
+      <DialogTitle id="edit-user">Edit user</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          To edit user, please enter your email, name and set your sex here.
+        </DialogContentText>
+        <TextField
+          autoFocus
+          error={!email}
+          helperText={!email && 'Set your email'}
+          margin="dense"
+          id="email"
+          label="Email Address"
+          type="email"
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          error={!name}
+          helperText={!name && 'Set your name'}
+          id="name"
+          label="Name"
+          type="text"
+          fullWidth
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <InputLabel>Sex</InputLabel>
+        <Select
+          labelId="sex"
+          id="sex"
+          fullWidth
+          value={sex}
+          onChange={(e) => setSex(e.target.value)}
+        >
+          <MenuItem value={'male'}>Male</MenuItem>
+          <MenuItem value={'female'}>Female</MenuItem>
+        </Select>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancel
+        </Button>
+        <Button onClick={onSubmit} color="primary">
+          Submit
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }

@@ -8,8 +8,12 @@ import App from './app'
 
 import reportWebVitals from './reportWebVitals'
 
+import GlobalStyles from './global-styles'
+
 ReactDOM.render(
   <Provider store={store}>
+    <GlobalStyles />
+
     <App />
   </Provider>,
   document.getElementById('root'),
